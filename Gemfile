@@ -13,7 +13,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'bcrypt', '~> 3.1.7'
 
 
-group :production do 
+group :production do
  gem 'pg'
 end
 
