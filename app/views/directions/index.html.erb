@@ -13,7 +13,7 @@
     <% @directions.each do |direction| %>
       <tr>
         <td><%= link_to 'Show', direction %></td>
-        <td><%= link_to 'Edit', edit_direction_path(direction) %></td>
+        <td><%= link_to 'Edit', edit_user_direction_path(direction) %></td>
         <td><%= link_to 'Destroy', direction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Direction', new_direction_path %>
+<%= link_to 'New Direction', new_user_direction_path %>

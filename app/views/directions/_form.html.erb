@@ -1,4 +1,4 @@
-<%= form_for(@direction) do |f| %>
+<%= form_for(@direction), url: user_directions_path do |f| %>
   <% if @direction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@direction.errors.count, "error") %> prohibited this direction from being saved:</h2>

@@ -1,5 +1,36 @@
 <h1>New Direction</h1>
 
-<%= render 'form' %>
+<%= form_for :direction, url: user_directions_path do |f| %>
 
-<%= link_to 'Back', directions_path %>
+  <% if @direction.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@direction.errors.count, "error") %> prohibited
+        this direction from being saved:
+      </h2>
+      <ul>
+        <% @direction.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :origin %><br>
+    <%= f.text_field :origin %>
+  </p>
+
+  <p>
+    <%= f.label :destination %><br>
+    <%= f.text_field :destination %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
+
+
+<%= link_to 'Back to Directions', user_directions_path %>
