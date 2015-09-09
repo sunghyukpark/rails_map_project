@@ -11,6 +11,9 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'bcrypt', '~> 3.1.7'
+gem 'httparty'
+gem 'dotenv-rails', :groups => [:development, :test]
+gem 'awesome_print'
 
 
 group :production do

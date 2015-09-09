@@ -1,44 +1,48 @@
+require 'google_api'
+
 class DirectionsController < ApplicationController
   before_action :set_direction, only: [:show, :edit, :update, :destroy]
 
-  # GET /directions
-  # GET /directions.json
   def index
     @directions = Direction.all
   end
 
-  # GET /directions/1
-  # GET /directions/1.json
   def show
   end
 
-  # GET /directions/new
   def new
     @direction = Direction.new
   end
 
-  # GET /directions/1/edit
   def edit
   end
 
-  # POST /directions
-  # POST /directions.json
+
   def create
     @direction = Direction.new(direction_params)
 
-    respond_to do |format|
-      if @direction.save
-        format.html { redirect_to @direction, notice: 'Direction was successfully created.' }
-        format.json { render :show, status: :created, location: @direction }
-      else
-        format.html { render :new }
-        format.json { render json: @direction.errors, status: :unprocessable_entity }
-      end
+    # api request to get distance/ duration
+    direction_client = DirectionsClient.new
+    @distance = direction_client.make_api_request(
+                origin: params[:origin],
+                destination: params[:destination],
+                mode: params[:mode])[:distance]
+    @duration = direction_client.make_api_request(
+                origin: params[:origin],
+                destination: params[:destination],
+                mode: params[:mode])[:duration]
+
+    @direction.distance = @distance
+    @direction.duration = @duration
+
+    if @direction.save
+      redirect_to @direction
+    else
+      redirect_to user_direcions_path
     end
   end
 
-  # PATCH/PUT /directions/1
-  # PATCH/PUT /directions/1.json
+
   def update
     respond_to do |format|
       if @direction.update(direction_params)
@@ -51,8 +55,6 @@ class DirectionsController < ApplicationController
     end
   end
 
-  # DELETE /directions/1
-  # DELETE /directions/1.json
   def destroy
     @direction.destroy
     respond_to do |format|
