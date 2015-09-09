@@ -1,15 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Hello~</h1><br>
+
 <p>
   <strong>Username:</strong>
   <%= @user.username %>
 </p>
 
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Directions', user_directions_path(@user) %>
+<%= link_to 'Logout', '/logout' %> |
+<%= link_to 'Directions', user_directions_path(@user) %> 
+
+
 

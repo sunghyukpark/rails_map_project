@@ -19,27 +19,27 @@ class DirectionsController < ApplicationController
 
 
   def create
-    @direction = Direction.new(direction_params)
+    # @direction = Direction.new(direction_params)
 
-    # api request to get distance/ duration
-    direction_client = DirectionsClient.new
-    @distance = direction_client.make_api_request(
-                origin: params[:origin],
-                destination: params[:destination],
-                mode: params[:mode])[:distance]
-    @duration = direction_client.make_api_request(
-                origin: params[:origin],
-                destination: params[:destination],
-                mode: params[:mode])[:duration]
+    # # api request to get distance/ duration
+    # direction_client = DirectionsClient.new
+    # @distance = direction_client.make_api_request(
+    #             origin: params[:origin],
+    #             destination: params[:destination],
+    #             mode: params[:mode])[:distance]
+    # @duration = direction_client.make_api_request(
+    #             origin: params[:origin],
+    #             destination: params[:destination],
+    #             mode: params[:mode])[:duration]
 
-    @direction.distance = @distance
-    @direction.duration = @duration
+    # @direction.distance = @distance
+    # @direction.duration = @duration
 
-    if @direction.save
-      redirect_to @direction
-    else
-      redirect_to user_direcions_path
-    end
+    # if @direction.save
+    #   redirect_to @direction
+    # else
+    #   redirect_to user_direcions_path
+    # end
   end
 
 
