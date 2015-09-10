@@ -1,3 +1,13 @@
-<p id="notice"><%= notice %></p>
+<h1>This is Direction #<%= @direction.id %></h1><br>
+
+<h3>
+	<div>From: <%= @direction.origin %></div>
+	<div>To: <%= @direction.destination %></div>
+	<div>Distance: <%= @direction.distance %></div>
+	<div>Duration: <%= @direction.duration %></div>
+</h3>
+
 
 <%= link_to 'Back to Directions', user_directions_path %>
+
+

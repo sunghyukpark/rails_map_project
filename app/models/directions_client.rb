@@ -18,19 +18,13 @@ class DirectionsClient
                                 destination: destination,
                                 mode: mode
                               })
-    ap response
     if response.success?
       json = JSON.parse(response.body)
       distance = json["routes"][0]["legs"][0]["distance"]["text"]
       duration = json["routes"][0]["legs"][0]["duration"]["text"]
-      return json
-      # return {distance: distance, duration: duration}
+      return {distance: distance, duration: duration}
     else
       "Duration Request Failed"
     end
   end
 end
-
-
-
-
