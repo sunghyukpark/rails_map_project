@@ -3,7 +3,7 @@
 
 <%= link_to 'Sign up', new_user_path %>
 <%= link_to 'Sign in', '/login' if current_user.nil? %>
-<%= link_to 'My Directions', user_directions_path(current_user) %>
+<%= link_to 'My Directions', user_directions_path(current_user) if current_user %>
 
 
 
