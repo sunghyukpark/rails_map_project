@@ -1,7 +1,4 @@
-
 class DirectionsController < ApplicationController
-  before_action :set_direction, only: [:show, :edit, :update, :destroy]
-
 
   def index
     @user = User.find(params[:user_id])
@@ -55,10 +52,6 @@ class DirectionsController < ApplicationController
 
 
   private
-    def set_direction
-      @direction = Direction.find(params[:id])
-    end
-
     def direction_params
       params.require(:direction).permit(:origin, :destination, :mode)
     end
