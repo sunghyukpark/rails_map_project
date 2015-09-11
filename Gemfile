@@ -16,6 +16,7 @@ gem 'dotenv-rails', :groups => [:development, :test]
 gem 'awesome_print'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem 'react-rails'
 
 
 

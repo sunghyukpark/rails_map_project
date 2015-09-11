@@ -21,11 +21,12 @@ class SessionsController < ApplicationController
     redirect_to '/login'
   end
 
-
+  
   def auth_create
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
     redirect_to user_path(user)
   end
+
 
 end
