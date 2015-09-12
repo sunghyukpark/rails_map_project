@@ -17,6 +17,7 @@ gem 'awesome_print'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'react-rails'
+gem 'gon', '~> 6.0.1'
 
 
 

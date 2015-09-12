@@ -7,6 +7,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 					 :info_fields => 'email'
 end
 
-# config.omniauth :facebook, 'app_id', 'app_secret',  scope: 'email', info_fields: 'email'
 
 

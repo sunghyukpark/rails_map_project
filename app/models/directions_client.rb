@@ -18,6 +18,7 @@ class DirectionsClient
                                 destination: destination,
                                 mode: mode
                               })
+
     if response.success?
       json = JSON.parse(response.body)
       distance = json["routes"][0]["legs"][0]["distance"]["text"]

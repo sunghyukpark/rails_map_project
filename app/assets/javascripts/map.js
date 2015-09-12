@@ -1,33 +1,33 @@
 $(document).ready(function(){
-  console.log("i'm here")
-	var origin = "740 Webster St. San Francisco"
-	var destination = "633 Folsom St. San Francisco"
-	var mode = "driving"
 
-	calcAndDisplayDirection(origin, destination, mode);
+	calcAndDisplayDirection();
 
 })
 
 
 
 
-function calcAndDisplayDirection(origin, destination, mode) {
+function calcAndDisplayDirection() {
+
+	var origin = document.getElementById('dir-origin').innerHTML
+	var destination = document.getElementById('dir-destination').innerHTML
+	var mode = document.getElementById('dir-mode').innerHTML
   var directionsDisplay = new google.maps.DirectionsRenderer;
   var directionsService = new google.maps.DirectionsService;
 
   var sf_map = initMapOfSanFrancisco();
 
-	directionsDisplay.setMap(sf_map); 
+  directionsDisplay.setMap(sf_map); 
+
 
 	directionsService.route(
   	{	origin: origin,
     	destination: destination,
     	travelMode: setTravelMode(mode)},
-
   	function(response, status){
     	if (status === google.maps.DirectionsStatus.OK){
     		console.log("inside request");
-    		directionsDisplay.setDirections(response);
+    		directionsDisplay.setDirections(response);	
     	} 
 
     	else { window.alert('Directions request failed due to ' + status);
@@ -39,6 +39,7 @@ function calcAndDisplayDirection(origin, destination, mode) {
 }
 
 
+
 function initMapOfSanFrancisco(){
 	var selector = document.getElementById('map');
 	var options = {
@@ -47,7 +48,8 @@ function initMapOfSanFrancisco(){
 	};
 
 	var sf_map = new google.maps.Map(selector, options);
-
+	console.log(sf_map)
+	console.log("inside map")
 	return sf_map;
 }
 

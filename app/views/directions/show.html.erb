@@ -1,13 +1,15 @@
 <h1>This is Direction #<%= @direction.id %></h1><br>
 
 <h3>
-	<div>From: <%= @direction.origin %></div>
-	<div>To: <%= @direction.destination %></div>
-	<div>Distance: <%= @direction.distance %></div>
-	<div>Duration: <%= @direction.duration %></div>
+	From:<div id='dir-origin'><%= @direction.origin %></div>
+	To:<div id='dir-destination'><%= @direction.destination %></div>
+	By:<div id='dir-mode'><%= @direction.mode %></div>
+	<div id='dir-distance'>Distance: <%= @direction.distance %></div>
+	<div id='dir-duration'>Duration: <%= @direction.duration %></div>
 </h3>
 
-<%= render 'map' %>
 
 <%= link_to 'Back to Directions', user_directions_path %>
+<%= render 'map' %>
+
 

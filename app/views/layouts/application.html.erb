@@ -2,11 +2,12 @@
 <html>
 <head>
   <title>RailsMapProject</title>
+
+	<script src="http://maps.googleapis.com/maps/api/js?key=#{GOOGLE_API_KEY}"></script>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <script src="http://maps.googleapis.com/maps/api/js?key=#{GOOGLE_API_KEY}"></script>
-
 </head>
 <body>
 	<% if current_user %>
