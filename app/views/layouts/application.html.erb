@@ -10,6 +10,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<%= react_component :WelcomeGofast %>
+
 	<% if current_user %>
 		Signed in as <strong><%= current_user.email %></strong>
 		<%= link_to "Sign out", signout_path, id: "sign_out" %>
