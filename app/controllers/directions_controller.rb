@@ -45,8 +45,8 @@ class DirectionsController < ApplicationController
       destination: params[:destination],
       mode: params[:mode])
 
-    # @direction.duration = response[:duration]
-    # @direction.distance = response[:distance]
+    @direction.duration = response[:duration]
+    @direction.distance = response[:distance]
 
     if @direction.save
       if request.xhr?

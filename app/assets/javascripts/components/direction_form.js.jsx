@@ -1,6 +1,6 @@
 var DirectionForm = React.createClass({
 	handleSubmit: function(e){
-		e.preventDefault;
+		e.preventDefault();
 
 		var origin = React.findDOMNode(this.refs.origin).value.trim();
 		var destination = React.findDOMNode(this.refs.destination).value.trim();
@@ -12,8 +12,9 @@ var DirectionForm = React.createClass({
 		};
 
 		// declare formData to make ajax request to server
-		var formData = $(this.refs.form.getDOMNode()).serialize();
-		this.props.onDirectionSubmit(formData);
+		this.props.onDirectionSubmit({origin: origin, 
+																	destination: destination,
+																	mode: mode });
 
 
 		// initializing form value

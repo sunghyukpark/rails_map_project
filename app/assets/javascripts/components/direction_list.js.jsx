@@ -7,6 +7,7 @@ var DirectionList = React.createClass({
           <div className='destination'> Destination: {direction.destination} </div>
           <div className='duration'> Duration: {direction.duration} </div>
           <div className='distance'> Distance: {direction.distance} </div>
+          <div className='mode'> By: {direction.mode} </div>
           <div></div>
         </Direction>
       );

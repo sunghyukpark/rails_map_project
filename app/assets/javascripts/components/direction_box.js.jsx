@@ -1,6 +1,6 @@
 var DirectionBox = React.createClass({
 
-  getInitialState: function () {
+  getInitialState: function() {
     return JSON.parse(this.props.data_json);
   },
 
@@ -16,14 +16,18 @@ var DirectionBox = React.createClass({
   },
 
 
-  handleDirectionSubmit: function (formData) {
-    $.ajax({
-      data: formData,
-      url: JSON.parse(this.props.data_json).direction_form.action,
+  handleDirectionSubmit: function(direction){
+  	var directions = this.state.directions;
+    var newDirections = directions.concat([direction]);
+    this.setState({directions: newDirections});
+
+		$.ajax({
+    	url: JSON.parse(this.props.data_json).direction_form.action,
+      data: direction,
       type: 'POST',
       dataType: "json",
-      success: function ( data ) {
-        this.setState({ directions: data });
+      success: function(data){
+        this.setState({ data: data });
       }.bind(this)
     });
   },
@@ -34,7 +38,7 @@ var DirectionBox = React.createClass({
   },
 
 
-  render: function () {
+  render: function(){
     return (
       <div className="comment-box">
         <DirectionList data= { this.state.directions } />
@@ -42,27 +46,6 @@ var DirectionBox = React.createClass({
       </div>
     );
   }
+
 });
 
-// var DirectionBox = React.createClass({
-
-// 	getInitialState: function(){
-// 		var data = JSON.parse(this.props.data_json);
-// 		return data;
-// 	},
-
-// 	componentDidMount: function(){
-// 		$.ajax({
-
-// 		})
-// 	},
-
-// 	render: function(){
-// 		return (
-// 			<div className='directionBox'>
-// 				<DirectionList data={JSON.parse(this.props.data_json)}/>	
-// 				<DirectionForm data={JSON.parse(this.props.data_json)}/>
-// 			</div>
-// 		);
-// 	}
-// });
