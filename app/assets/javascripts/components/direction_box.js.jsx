@@ -1,6 +1,9 @@
 var DirectionBox = React.createClass({
 
-  
+  propTypes:{
+    data_json: React.PropTypes.string.isRequired,
+  },
+
 
   getInitialState: function() {
     return JSON.parse(this.props.data_json);
