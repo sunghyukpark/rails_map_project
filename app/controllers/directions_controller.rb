@@ -2,7 +2,17 @@ class DirectionsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @directions = @user.directions
+    @data = {
+      directions: @user.directions.last(5),
+      direction_form: {
+        action: user_directions_path(@user),
+        csrf_param: request_forgery_protection_token,
+        csrf_token: form_authenticity_token
+      }
+    }
+
+    # @user = User.find(params[:user_id])
+    # @directions = @user.directions
   end
 
 

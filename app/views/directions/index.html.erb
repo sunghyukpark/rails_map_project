@@ -1,11 +1,5 @@
-<h1>Listing Directions</h1>
-
-<% @directions.each do |direction| %>
-  <div><a href='<%= user_direction_path(@user, direction) %>'>Direction #<%= direction.id %></a></div>
-  <div><%= direction.origin %></div>
-  <div><%= direction.destination %></div>
-  <div><%= direction.mode %></div><br><br>
-<% end %>
+<%= react_component :DirectionBox, {data_json: @data.to_json} %>
 
 
 <div><%= link_to 'New Direction', new_user_direction_path %></div>
+
