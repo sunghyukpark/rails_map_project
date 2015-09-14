@@ -6,8 +6,8 @@ class DirectionsController < ApplicationController
       directions: @user.directions.last(5),
       direction_form: {
         action: user_directions_path(@user),
-        csrf_param: request_forgery_protection_token,
-        csrf_token: form_authenticity_token
+        request_forgery_token: request_forgery_protection_token,
+        form_authenticity_token: form_authenticity_token
       }
     }
 
@@ -33,21 +33,28 @@ class DirectionsController < ApplicationController
   def create
     @user = User.find(params[:user_id])
 
-    @direction = @user.directions.new(direction_params)
+    @direction = @user.directions.new(
+      origin: params[:origin],
+      destination: params[:destination],
+      mode: params[:mode])
 
     direction_client = DirectionsClient.new
-    
-    response = direction_client.make_api_request(origin: direction_params[:origin],
-      destination: direction_params[:destination],
-      mode: direction_params[:mode])
 
-    @direction.duration = response[:duration]
-    @direction.distance = response[:distance]
-    @direction.mode = direction_params[:mode]
+    response = direction_client.make_api_request(
+      origin: params[:origin],
+      destination: params[:destination],
+      mode: params[:mode])
+
+    # @direction.duration = response[:duration]
+    # @direction.distance = response[:distance]
 
     if @direction.save
-      redirect_to user_direction_path(@user, @direction)
-    else
+      if request.xhr?
+        render @user.directions.last(5).to_json
+      else
+        redirect_to user_direction_path(@user, @direction)
+      end
+    else  
       render :new
     end
 
@@ -63,8 +70,8 @@ class DirectionsController < ApplicationController
   end
 
 
-  private
-    def direction_params
-      params.require(:direction).permit(:origin, :destination, :mode)
-    end
+  # private
+  #   def direction_params
+  #     params.require(:@direction).permit(:origin, :destination, :mode)
+  #   end
 end

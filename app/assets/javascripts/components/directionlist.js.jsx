@@ -1,6 +1,6 @@
 var DirectionList = React.createClass({
   render: function() {
-    var directionNodes = this.props.data.directions.map(function (direction) {
+    var directionNodes = this.props.data.map(function (direction) {
       return (
         <Direction className='direction'> Direction #{direction.id}
           <div className='origin'> Origin: {direction.origin} </div>
