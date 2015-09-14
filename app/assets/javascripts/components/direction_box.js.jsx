@@ -1,26 +1,33 @@
 var DirectionBox = React.createClass({
 
+  
+
   getInitialState: function() {
     return JSON.parse(this.props.data_json);
   },
 
 
-  loadDirectionsFromServer: function(){
-  	$.ajax({
-  		url: JSON.parse(this.props.data_json).direction_form.action,
-  		dataType:'json',
-  		success: function(data){
-  			this.setState({data: data});
-  		}.bind(this)
-  	})
-  },
+  // loadDirectionsFromServer: function(){
+  // 	$.ajax({
+  // 		url: JSON.parse(this.props.data_json).direction_form.action,
+  // 		dataType:'json',
+  // 		success: function(data){
+  // 			this.setState({data: data});
+  // 		}.bind(this)
+  // 	})
+  // },
+
+
+  // componentDidMount: function(){
+  //   this.loadDirectionsFromServer();
+  // },
 
 
   handleDirectionSubmit: function(direction){
   	var directions = this.state.directions;
     var newDirections = directions.concat([direction]);
     this.setState({directions: newDirections});
-
+    
 		$.ajax({
     	url: JSON.parse(this.props.data_json).direction_form.action,
       data: direction,
@@ -32,12 +39,6 @@ var DirectionBox = React.createClass({
     });
   },
 
-
-  componentDidMount: function(){
-  	this.loadDirectionsFromServer();
-  },
-
-
   render: function(){
     return (
       <div className="comment-box">
@@ -46,6 +47,7 @@ var DirectionBox = React.createClass({
       </div>
     );
   }
-
 });
+
+
 

@@ -11,7 +11,7 @@ var DirectionForm = React.createClass({
 			return;
 		};
 
-		// declare formData to make ajax request to server
+		// data to be used for ajax request to server
 		this.props.onDirectionSubmit({origin: origin, 
 																	destination: destination,
 																	mode: mode });
