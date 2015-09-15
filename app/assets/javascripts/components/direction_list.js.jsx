@@ -5,16 +5,23 @@ var DirectionList = React.createClass({
   },
 
 
-  removeDirection: function(){
-    this.setState
+  onButtonClick: function(event){
+    event.preventDefault();
+
+    //select direciton to delete
+    var direction = this.props.directions[{index}]
+
+    this.props.onRemoveDirection({
+      direction: direction
+    })
   },
 
 
   render: function() {
-
     var directionNodes = this.props.directions.map(function (direction, index) {
       return (
         <Direction key={index} className='direction'> 
+          <div className='id'> Direction #{direction.id} </div>
           <div className='origin'> Origin: {direction.origin} </div>
           <div className='destination'> Destination: {direction.destination} </div>
           <div className='duration'> Duration: {direction.duration} </div>
@@ -31,11 +38,7 @@ var DirectionList = React.createClass({
       </div>
     );
   }
+
 });
 
 
-var RemoveDirectionButton = React.createClass({
-  render: function(){
-    return <button onClick={this.props.clickHandler}>remove</button> 
-  }
-})

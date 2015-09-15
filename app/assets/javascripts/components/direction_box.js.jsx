@@ -28,22 +28,37 @@ var DirectionBox = React.createClass({
     });
   },
 
+
   setDirections: function(directions){
     this.setState({directions:directions});
   },
 
 
+  // onRemoveDirection: function(direction){
+  //   var dIndex = parseInt(direction.target.value, 10);
+  //   this.state.directions.splice(dIndex,1);
+  //   this.setState({directions: this.state.directions});
+
+  //   $.ajax({
+  //     url: this.props.url+'.json',
+  //     type: 'DELETE', 
+  //     success: this.setDirections
+  //   })
+
+  // },
+
 
   render: function(){
     return (
       <div className="comment-box">
-        <DirectionList directions={ this.state.directions } />
+        <DirectionList 
+          directions={ this.state.directions } 
+          onRemoveDirection={this.onRemoveDirection} />
         <DirectionForm 
           url={this.props.url}
           request_forgery_token={this.props.request_forgery_token}
           form_authenticity_token={this.props.form_authenticity_token}
-          onSubmit={this.onAddDirection} 
-        />
+          onSubmit={this.onAddDirection} />
       </div>
     );
   }

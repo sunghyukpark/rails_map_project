@@ -1,42 +1,43 @@
-// $(document).ready(function(){
+$(document).ready(function(){
 
-// 	calcAndDisplayDirection();
+	calcAndDisplayDirection();
 
-// })
-
-
+})
 
 
-// function calcAndDisplayDirection() {
-
-// 	var origin = document.getElementById('dir-origin').innerHTML
-// 	var destination = document.getElementById('dir-destination').innerHTML
-// 	var mode = document.getElementById('dir-mode').innerHTML
-//   var directionsDisplay = new google.maps.DirectionsRenderer;
-//   var directionsService = new google.maps.DirectionsService;
-
-//   var sf_map = initMapOfSanFrancisco();
-
-//   directionsDisplay.setMap(sf_map); 
 
 
-// 	directionsService.route(
-//   	{	origin: origin,
-//     	destination: destination,
-//     	travelMode: setTravelMode(mode)},
-//   	function(response, status){
-//     	if (status === google.maps.DirectionsStatus.OK){
-//     		console.log("inside request");
-//     		directionsDisplay.setDirections(response);	
-//     	} 
+function calcAndDisplayDirection() {
 
-//     	else { window.alert('Directions request failed due to ' + status);
-//     	}
+	var origin = $('div.origin')
+	var origin = document.getElementById('dir-origin').innerHTML
+	var destination = document.getElementById('dir-destination').innerHTML
+	var mode = document.getElementById('dir-mode').innerHTML
+  var directionsDisplay = new google.maps.DirectionsRenderer;
+  var directionsService = new google.maps.DirectionsService;
 
-//   	}
-// 	);
+  var sf_map = initMapOfSanFrancisco();
 
-// }
+  directionsDisplay.setMap(sf_map); 
+
+
+	directionsService.route(
+  	{	origin: origin,
+    	destination: destination,
+    	travelMode: setTravelMode(mode)},
+  	function(response, status){
+    	if (status === google.maps.DirectionsStatus.OK){
+    		console.log("inside request");
+    		directionsDisplay.setDirections(response);	
+    	} 
+
+    	else { window.alert('Directions request failed due to ' + status);
+    	}
+
+  	}
+	);
+
+}
 
 
 
