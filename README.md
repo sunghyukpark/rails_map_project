@@ -1,4 +1,4 @@
-Sample Rails App with React Components
+#Sample Rails App with React Components
 
 
 
