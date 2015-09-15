@@ -1,4 +1,4 @@
-Sample Rails App with React Components
+<h1>Sample Rails App with React Components</h1>
 
 
 * Overview
