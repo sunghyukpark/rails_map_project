@@ -2,17 +2,19 @@ class DirectionsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @data = {
+    @directions = @user.directions
+    @props = {
       directions: @user.directions.last(5),
-      direction_form: {
-        action: user_directions_path(@user),
-        request_forgery_token: request_forgery_protection_token,
-        form_authenticity_token: form_authenticity_token
-      }
+      url: user_directions_path(@user),
+      request_forgery_token: request_forgery_protection_token,
+      form_authenticity_token: form_authenticity_token
     }
 
-    # @user = User.find(params[:user_id])
-    # @directions = @user.directions
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @props}
+    end
+
   end
 
 
@@ -36,7 +38,8 @@ class DirectionsController < ApplicationController
     @direction = @user.directions.new(
       origin: params[:origin],
       destination: params[:destination],
-      mode: params[:mode])
+      mode: params[:mode]
+    )
 
     direction_client = DirectionsClient.new
 
@@ -49,14 +52,13 @@ class DirectionsController < ApplicationController
     @direction.distance = response[:distance]
 
     if @direction.save
-      if request.xhr?
-        render @user.directions.last(5).to_json
-      else
-        redirect_to user_direction_path(@user, @direction)
+      respond_to do |format| 
+        format.html {render :show}
+        format.json {render json: @user.directions.last(5)}
       end
-    else  
+    else 
       render :new
-    end
+    end 
 
   end
 
@@ -69,9 +71,4 @@ class DirectionsController < ApplicationController
   def destroy
   end
 
-
-  # private
-  #   def direction_params
-  #     params.require(:@direction).permit(:origin, :destination, :mode)
-  #   end
 end

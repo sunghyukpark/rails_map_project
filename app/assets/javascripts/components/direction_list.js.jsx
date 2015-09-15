@@ -1,8 +1,20 @@
 var DirectionList = React.createClass({
+
+  propTypes:{
+    directions: React.PropTypes.array.isRequired,
+  },
+
+
+  removeDirection: function(){
+    this.setState
+  },
+
+
   render: function() {
-    var directionNodes = this.props.data.map(function (direction) {
+
+    var directionNodes = this.props.directions.map(function (direction, index) {
       return (
-        <Direction className='direction'> Direction #{direction.id}
+        <Direction key={index} className='direction'> 
           <div className='origin'> Origin: {direction.origin} </div>
           <div className='destination'> Destination: {direction.destination} </div>
           <div className='duration'> Duration: {direction.duration} </div>
@@ -20,3 +32,10 @@ var DirectionList = React.createClass({
     );
   }
 });
+
+
+var RemoveDirectionButton = React.createClass({
+  render: function(){
+    return <button onClick={this.props.clickHandler}>remove</button> 
+  }
+})

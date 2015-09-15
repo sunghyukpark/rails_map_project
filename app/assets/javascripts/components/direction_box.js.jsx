@@ -1,52 +1,49 @@
 var DirectionBox = React.createClass({
 
   propTypes:{
-    data_json: React.PropTypes.string.isRequired,
+    directions:               React.PropTypes.array.isRequired,
+    url:                      React.PropTypes.string.isRequired,
+    request_forgery_token:    React.PropTypes.string.isRequired,           
+    form_authenticity_token:  React.PropTypes.string.isRequired,             
   },
 
 
-  getInitialState: function() {
-    return JSON.parse(this.props.data_json);
+  getInitialState: function(){
+    return {
+      directions: this.props.directions
+    }
   },
 
 
-  // loadDirectionsFromServer: function(){
-  // 	$.ajax({
-  // 		url: JSON.parse(this.props.data_json).direction_form.action,
-  // 		dataType:'json',
-  // 		success: function(data){
-  // 			this.setState({data: data});
-  // 		}.bind(this)
-  // 	})
-  // },
+  onAddDirection: function(direction){
+  	var directions = this.state.directions.concat([direction]);
+    this.setState({directions:directions});
 
-
-  // componentDidMount: function(){
-  //   this.loadDirectionsFromServer();
-  // },
-
-
-  handleDirectionSubmit: function(direction){
-  	var directions = this.state.directions;
-    var newDirections = directions.concat([direction]);
-    this.setState({directions: newDirections});
-    
 		$.ajax({
-    	url: JSON.parse(this.props.data_json).direction_form.action,
+    	url: this.props.url+'.json',
       data: direction,
       type: 'POST',
-      dataType: "json",
-      success: function(data){
-        this.setState({ data: data });
-      }.bind(this)
+      dataType: 'json',
+      success: this.setDirections,
     });
   },
+
+  setDirections: function(directions){
+    this.setState({directions:directions});
+  },
+
+
 
   render: function(){
     return (
       <div className="comment-box">
-        <DirectionList data= { this.state.directions } />
-        <DirectionForm form={ this.state.direction_form } onDirectionSubmit={ this.handleDirectionSubmit } />
+        <DirectionList directions={ this.state.directions } />
+        <DirectionForm 
+          url={this.props.url}
+          request_forgery_token={this.props.request_forgery_token}
+          form_authenticity_token={this.props.form_authenticity_token}
+          onSubmit={this.onAddDirection} 
+        />
       </div>
     );
   }

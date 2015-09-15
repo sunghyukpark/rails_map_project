@@ -30,8 +30,8 @@ var WelcomeGofast = React.createClass({
 // 	},
 
 // 	componentDidMount: function(){
-// 		// var request = $.getJSON('/todo_lists/'+this.props.todoListId);
-// 		var request = TodoLists.load(this.props.todoListId)
+// 		var request = $.getJSON('/todo_lists/'+this.props.todoListId);
+// 		// var request = TodoLists.load(this.props.todoListId)
 // 		request.done(this.onLoaded)
 // 		request.done(this.onFailedToLoad)
 // 	},

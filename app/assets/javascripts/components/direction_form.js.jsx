@@ -1,10 +1,22 @@
 var DirectionForm = React.createClass({
-	handleSubmit: function(e){
-		e.preventDefault();
 
-		var origin = React.findDOMNode(this.refs.origin).value.trim();
-		var destination = React.findDOMNode(this.refs.destination).value.trim();
-		var mode = React.findDOMNode(this.refs.mode).value.trim();
+  propTypes:{
+    url: React.PropTypes.string.isRequired,
+    request_forgery_token: React.PropTypes.string.isRequired,
+    form_authenticity_token: React.PropTypes.string.isRequired,
+    onSubmit: React.PropTypes.func.isRequired,
+  },
+
+	onSubmit: function(event){
+		event.preventDefault();
+
+		var originDOMNode      = this.refs.origin.getDOMNode();
+		var destinationDOMNode = this.refs.destination.getDOMNode();
+		var modeDOMNode        = this.refs.mode.getDOMNode();
+
+		var origin      = originDOMNode.value.trim();
+		var destination = destinationDOMNode.value.trim();
+		var mode        = modeDOMNode.value.trim();
 
 		// check validity
 		if(!origin || !destination || !mode){
@@ -12,15 +24,17 @@ var DirectionForm = React.createClass({
 		};
 
 		// data to be used for ajax request to server
-		this.props.onDirectionSubmit({origin: origin, 
-																	destination: destination,
-																	mode: mode });
+		this.props.onSubmit({
+			origin: origin, 
+			destination: destination,
+			mode: mode
+		});
 
 
 		// initializing form value
-		React.findDOMNode(this.refs.origin).value = '';
-		React.findDOMNode(this.refs.destination).value = '';
-		React.findDOMNode(this.refs.mode).value = '';
+		originDOMNode.value      = '';
+		destinationDOMNode.value = '';
+		modeDOMNode.value        = '';
 
 		return;
 	},
@@ -28,11 +42,11 @@ var DirectionForm = React.createClass({
 
 	render: function(){
 		return (
-			<form ref='form' className='directionForm' action={this.props.form.action} method='post' onSubmit={this.handleSubmit}>
-				<input type="hidden" name={ this.props.form.request_forgery_token} value={ this.props.form.form_authenticity_token } />
-			  <input type='text' name='origin' placeholder='From' ref='origin'/>
-			  <input type='text' name='destination' placeholder='To' ref='destination'/>
-			  <input type='text' name='mode' placeholder='By' ref='mode'/>
+			<form ref='form' className='directionForm' action={this.props.url} method='post' onSubmit={this.onSubmit}>
+				<input type="hidden" name={ this.props.request_forgery_token} value={ this.props.form_authenticity_token } />
+			  <input type='text' name='origin' placeholder='From' defaultValue='633 Folsom St. San Francisco' ref='origin'/>
+			  <input type='text' name='destination' placeholder='To' defaultValue='740 Webster st. San Francisco' ref='destination'/>
+			  <input type='text' name='mode' placeholder='By' defaultValue='driving' ref='mode'/>
 			  <input type='submit' value='Post' />
 			</form>
 		)
