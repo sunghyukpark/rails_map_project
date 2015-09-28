@@ -43,4 +43,5 @@
 	4. Add Bart API 
 	5. Deploy to Heroku
 	6. Use Firebase for external database
+	7. Add Rspec test
 
